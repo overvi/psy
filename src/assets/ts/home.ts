@@ -136,7 +136,7 @@ modal.addEventListener("click", (e) => {
 });
 
 const toggleSidebarFn = () => {
-  sidebar?.classList.toggle("translate-x-full");
+  sidebar?.classList.toggle("hidden");
 };
 
 const toggleSidebar = document.querySelectorAll(".toggle-sidebar");
