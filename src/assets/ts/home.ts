@@ -137,7 +137,6 @@ modal.addEventListener("click", (e) => {
 
 const toggleSidebarFn = () => {
   sidebar?.classList.toggle("translate-x-[200%]");
-  document.documentElement.classList.toggle("overflow-hidden");
 };
 
 const toggleSidebar = document.querySelectorAll(".toggle-sidebar");
