@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/dist/styles/app.css" />
+    <script defer src="/dist/js/home.js"></script>
+  </head>
+  <body class="bg-gray-50 gap-8 flex justify-between min-h-screen">
+    <div
+      id="modal"
+      role="dialog"
+      aria-labelledby="edit-info"
+      aria-describedby="modal-desc"
+      class="fixed inset-0 z-[9999] px-3 hidden flex items-center justify-center bg-gray-900 bg-opacity-50"
+      aria-hidden="true"
+    >
+      <form class="bg-white rounded-2xl max-w-[32.875rem] w-full">
+        <div
+          class="xs:grid space-y-4 xs:space-y-0 p-4 pt-8 grid-cols-1 gap-y-6 gap-x-4"
+        >
+          <div class="xs:flex gap-4 text-nowrap">
+            <label
+              for="full-name"
+              class="bg-orange-400 block text-center justify-center items-center basis-[11.25rem] text-brown rounded-lg py-[10px] px-[30px]"
+            >
+              نام و نام خانوادگی
+            </label>
+            <input
+              value="ساغر بیتابی"
+              id="full-name"
+              placeholder="نام..."
+              class="bg-gray-100 w-full xs:w-auto py-[10px] xs:py-auto outline-none border-green-500 border text-center basis-[calc(100%-11.25rem)] flex justify-center items-center rounded-lg"
+            />
+          </div>
+          <div class="xs:flex gap-4 text-nowrap">
+            <label
+              for="email"
+              class="bg-orange-400 justify-center items-center flex basis-[11.25rem] text-brown rounded-lg py-[10px] px-[30px]"
+            >
+              ایمیل
+            </label>
+            <input
+              id="email"
+              value="god@gmail.com"
+              type="email"
+              placeholder="ایمیل..."
+              class="bg-gray-100 w-full xs:w-auto py-[10px] xs:py-auto outline-none basis-[calc(100%-11.25rem)] border-green-500 border text-center flex justify-center items-center rounded-lg"
+            />
+          </div>
+          <div class="xs:flex gap-4 text-nowrap h-fit">
+            <label
+              for="phone"
+              class="bg-orange-400 justify-center items-center flex basis-[11.25rem] text-brown rounded-lg py-[10px] px-[30px]"
+            >
+              شماره تلفن
+            </label>
+            <input
+              id="phone"
+              placeholder="شماره تلفن..."
+              value="+۹۸ ۰۹۹۰ ۱۲۳ ۴۵۶۷"
+              class="bg-gray-100 w-full xs:w-auto py-[10px] xs:py-auto outline-none basis-[calc(100%-11.25rem)] border-green-500 border text-center flex justify-center items-center rounded-lg"
+            />
+          </div>
+          <div class="xs:flex gap-4">
+            <label
+              for="address"
+              class="bg-orange-400 h-fit justify-center items-center flex basis-[11.25rem] text-brown rounded-lg py-[10px] px-[30px]"
+            >
+              آدرس
+            </label>
+            <textarea
+              wrap="soft"
+              id="address"
+              type="text"
+              placeholder="آدرس..."
+              class="bg-gray-100 w-full xs:w-auto py-[10px] xs:py-auto resize-none p-[10px] outline-none basis-[calc(100%-11.25rem)] border-green-500 border flex justify-center items-center rounded-lg"
+            >
+کشور فلان، استان فلان، شهر فلان، کوچه‌ی ۱، پلاک ۲، واحد ۳</textarea
+            >
+          </div>
+        </div>
+        <div
+          class="flex items-center mt-8 text-2xl pb-4 gap-8 px-4 w-full *:basis-full"
+        >
+          <button class="bg-green-300 text-green-950 rounded-2xl py-[10px]">
+            تایید
+          </button>
+          <button
+            id="close-modal"
+            class="text-green-950 border-2 border-green-500 rounded-2xl py-[10px]"
+          >
+            لغو
+          </button>
+        </div>
+      </form>
+    </div>
+    <aside
+      aria-label="Sidebar"
+      id="sidebar"
+      class="bg-green-300 transition-[transform] duration-700 z-[51] w-full md:w-auto md:translate-x-0 translate-x-full fixed bottom-0 top-0 md:relative flex flex-col justify-between text-green-950 basis-[22rem] py-8 px-6"
+    >
+      <div>
+        <div
+          class="flex w-full pb-6 border-b-[1.5px] border-b-green-500 md:border-b-gray-500 justify-between"
+        >
+          <a href="#" class="hidden md:flex items-center gap-2">
+            <svg
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="25"
+              viewBox="0 0 24 25"
+              fill="none"
+            >
+              <path
+                d="M4 12.5L20 12.5M20 12.5L13 5.5M20 12.5L13 19.5"
+                stroke="#003725"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <p class="text-base">برگشت به خانه</p>
+          </a>
+          <button class="flex toggle-sidebar items-center gap-2 md:hidden">
+            <svg
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="25"
+              height="24"
+              viewBox="0 0 25 24"
+              fill="none"
+            >
+              <path
+                d="M19.1335 5.70998C19.041 5.61728 18.9311 5.54373 18.8101 5.49355C18.6891 5.44337 18.5594 5.41754 18.4285 5.41754C18.2975 5.41754 18.1678 5.44337 18.0468 5.49355C17.9259 5.54373 17.816 5.61728 17.7235 5.70998L12.8335 10.59L7.94348 5.69998C7.85089 5.6074 7.74098 5.53396 7.62002 5.48385C7.49905 5.43375 7.36941 5.40796 7.23848 5.40796C7.10755 5.40796 6.9779 5.43375 6.85693 5.48385C6.73597 5.53396 6.62606 5.6074 6.53348 5.69998C6.44089 5.79256 6.36745 5.90247 6.31735 6.02344C6.26724 6.1444 6.24146 6.27405 6.24146 6.40498C6.24146 6.53591 6.26724 6.66556 6.31735 6.78652C6.36745 6.90749 6.44089 7.0174 6.53348 7.10998L11.4235 12L6.53348 16.89C6.44089 16.9826 6.36745 17.0925 6.31735 17.2134C6.26724 17.3344 6.24146 17.464 6.24146 17.595C6.24146 17.7259 6.26724 17.8556 6.31735 17.9765C6.36745 18.0975 6.44089 18.2074 6.53348 18.3C6.62606 18.3926 6.73597 18.466 6.85693 18.5161C6.9779 18.5662 7.10755 18.592 7.23848 18.592C7.36941 18.592 7.49905 18.5662 7.62002 18.5161C7.74098 18.466 7.85089 18.3926 7.94348 18.3L12.8335 13.41L17.7235 18.3C17.8161 18.3926 17.926 18.466 18.0469 18.5161C18.1679 18.5662 18.2975 18.592 18.4285 18.592C18.5594 18.592 18.6891 18.5662 18.81 18.5161C18.931 18.466 19.0409 18.3926 19.1335 18.3C19.2261 18.2074 19.2995 18.0975 19.3496 17.9765C19.3997 17.8556 19.4255 17.7259 19.4255 17.595C19.4255 17.464 19.3997 17.3344 19.3496 17.2134C19.2995 17.0925 19.2261 16.9826 19.1335 16.89L14.2435 12L19.1335 7.10998C19.5135 6.72998 19.5135 6.08998 19.1335 5.70998Z"
+                fill="#191C20"
+              />
+            </svg>
+            <p>بستن</p>
+          </button>
+          <p class="text-3.5xl">Psylo</p>
+        </div>
+
+        <div class="mt-8 block md:hidden border-b border-b-gray-500">
+          <a
+            href="#"
+            class="flex ps-[10px] py-[10.5px] mb-2 rounded-2xl duraton-700 transition-[background] hover:bg-gray-100 w-full gap-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="21"
+              height="20"
+              viewBox="0 0 21 20"
+              fill="none"
+            >
+              <path
+                d="M4.8335 17H7.8335V11H13.8335V17H16.8335V8L10.8335 3.5L4.8335 8V17ZM2.8335 19V7L10.8335 1L18.8335 7V19H11.8335V13H9.8335V19H2.8335Z"
+                fill="#003725"
+              />
+            </svg>
+            <p>برگشت به خانه</p>
+          </a>
+        </div>
+        <ul class="md:mt-16 mt-4 space-y-4 tab-toggles">
+          <li class="">
+            <button
+              role="tab"
+              aria-selected="true"
+              aria-controls="your-info"
+              id="your-info-button"
+              class="flex ps-[10px] bg-white tab-toggle rounded-2xl duraton-700 transition-[background] hover:bg-gray-100 py-[10.5px] w-full gap-2"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M19 20.75C19.2652 20.75 19.5196 20.6446 19.7071 20.4571C19.8946 20.2696 20 20.0152 20 19.75V18.504C20.004 15.698 16.026 13.5 12 13.5C7.974 13.5 4 15.698 4 18.504V19.75C4 20.0152 4.10536 20.2696 4.29289 20.4571C4.48043 20.6446 4.73478 20.75 5 20.75H19ZM15.604 6.854C15.604 7.32728 15.5108 7.79593 15.3297 8.23319C15.1485 8.67045 14.8831 9.06775 14.5484 9.40241C14.2138 9.73707 13.8164 10.0025 13.3792 10.1837C12.9419 10.3648 12.4733 10.458 12 10.458C11.5267 10.458 11.0581 10.3648 10.6208 10.1837C10.1836 10.0025 9.78625 9.73707 9.45159 9.40241C9.11692 9.06775 8.85146 8.67045 8.67034 8.23319C8.48922 7.79593 8.396 7.32728 8.396 6.854C8.396 5.89816 8.77571 4.98147 9.45159 4.30559C10.1275 3.62971 11.0442 3.25 12 3.25C12.9558 3.25 13.8725 3.62971 14.5484 4.30559C15.2243 4.98147 15.604 5.89816 15.604 6.854Z"
+                  stroke="#003725"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <p>اطلاعات شخصی</p>
+            </button>
+          </li>
+          <li>
+            <button
+              aria-controls="your-courses"
+              id="your-courses-button"
+              aria-selected="false"
+              role="tab"
+              class="flex ps-[10px] rounded-2xl tab-toggle duraton-700 transition-[background] hover:bg-gray-100 gap-2 py-[10.5px] w-full"
+            >
+              <svg
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M11 7H17M7 7H8M7 12H8M7 17H8M11 12H17M11 17H17M2.5 12C2.5 7.522 2.5 5.282 3.891 3.891C5.282 2.5 7.521 2.5 12 2.5C16.478 2.5 18.718 2.5 20.109 3.891C21.5 5.282 21.5 7.521 21.5 12C21.5 16.478 21.5 18.718 20.109 20.109C18.718 21.5 16.479 21.5 12 21.5C7.522 21.5 5.282 21.5 3.891 20.109C2.5 18.718 2.5 16.479 2.5 12Z"
+                  stroke="#003725"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <p>سفارش دوره</p>
+            </button>
+          </li>
+          <li>
+            <button
+              role="tab"
+              aria-controls="your-books"
+              id="your-books-button"
+              aria-selected="false"
+              class="flex rounded-2xl tab-toggle ps-[10px] duraton-700 transition-[background] hover:bg-gray-100 gap-2 py-[10.5px] w-full"
+            >
+              <svg
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M4 8C4 5.172 4 3.757 4.879 2.879C5.757 2 7.172 2 10 2H14C16.828 2 18.243 2 19.121 2.879C20 3.757 20 5.172 20 8V16C20 18.828 20 20.243 19.121 21.121C18.243 22 16.828 22 14 22H10C7.172 22 5.757 22 4.879 21.121C4 20.243 4 18.828 4 16V8Z"
+                  stroke="#003725"
+                  stroke-width="1.5"
+                />
+                <path
+                  d="M19.898 16H7.898C6.968 16 6.503 16 6.121 16.102C5.61231 16.2384 5.14849 16.5063 4.77618 16.8788C4.40386 17.2513 4.13616 17.7152 4 18.224"
+                  stroke="#003725"
+                  stroke-width="1.5"
+                />
+                <path
+                  d="M8 7H16M8 10.5H13"
+                  stroke="#003725"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+              </svg>
+              <p>سفارش کتاب</p>
+            </button>
+          </li>
+          <li>
+            <button
+              role="tab"
+              aria-controls="your-counseling"
+              id="your-counseling-button"
+              aria-selected="false"
+              class="flex ps-[10px] rounded-2xl tab-toggle duraton-700 transition-[background] hover:bg-gray-100 gap-2 py-[10.5px] w-full"
+            >
+              <svg
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M4 18V21M5 10V5C5 4.46957 5.21071 3.96086 5.58579 3.58579C5.96086 3.21071 6.46957 3 7 3H17C17.5304 3 18.0391 3.21071 18.4142 3.58579C18.7893 3.96086 19 4.46957 19 5V10"
+                  stroke="#003725"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M20 18H4V14.95C3.53654 14.8554 3.10943 14.6313 2.76828 14.3036C2.42712 13.9759 2.18592 13.5582 2.07269 13.099C1.95946 12.6397 1.97884 12.1577 2.12859 11.7091C2.27833 11.2604 2.5523 10.8634 2.91866 10.5642C3.28503 10.265 3.72876 10.0759 4.19832 10.0188C4.66788 9.9617 5.14399 10.039 5.57137 10.2417C5.99875 10.4444 6.35985 10.7642 6.61273 11.164C6.86562 11.5637 6.9999 12.027 7 12.5V14H17V12.5C17 11.837 17.2634 11.2011 17.7322 10.7322C18.2011 10.2634 18.837 10 19.5 10C20.12 9.99938 20.7181 10.2291 21.1782 10.6447C21.6383 11.0602 21.9275 11.6319 21.9899 12.2488C22.0522 12.8656 21.883 13.4836 21.5153 13.9827C21.1476 14.4819 20.6076 14.8266 20 14.95V18ZM20 18V21"
+                  stroke="#003725"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              <p>سفارش مشاوره</p>
+            </button>
+          </li>
+          <li>
+            <button
+              role="tab"
+              aria-controls="your-messages"
+              id="your-messages-button"
+              aria-selected="false"
+              class="flex rounded-2xl group tab-toggle ps-[10px] duraton-700 transition-[background] hover:bg-gray-100 gap-2 pe-5 justify-between py-[10.5px] w-full"
+            >
+              <div class="flex gap-2">
+                <svg
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M8 9H16M8 13H14M18 4C18.7956 4 19.5587 4.31607 20.1213 4.87868C20.6839 5.44129 21 6.20435 21 7V15C21 15.7956 20.6839 16.5587 20.1213 17.1213C19.5587 17.6839 18.7956 18 18 18H13L8 21V18H6C5.20435 18 4.44129 17.6839 3.87868 17.1213C3.31607 16.5587 3 15.7956 3 15V7C3 6.20435 3.31607 5.44129 3.87868 4.87868C4.44129 4.31607 5.20435 4 6 4H18Z"
+                    stroke="#003725"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <p>پیام ها</p>
+              </div>
+              <span
+                class="bg-white group-[.bg-white]:bg-green-300 px-[6px] rounded-full"
+                >10</span
+              >
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="flex w-full border-t pt-5 border-t-gray-500 justify-between items-center"
+      >
+        <div
+          class="hover:bg-orange-100 duration-700 transition-[background] py-[10px] px-2 flex w-full justify-between rounded-2xl"
+        >
+          <div class="flex items-center">
+            <img src="/src/assets/images/profile-picture.png" alt="" />
+            <p class="ps-[11px]">ساغر بیتایی</p>
+          </div>
+          <button aria-label="logout">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <path
+                d="M9 8.25V6.375C9 5.87772 9.19754 5.40081 9.54917 5.04917C9.90081 4.69754 10.3777 4.5 10.875 4.5H19.875C20.3723 4.5 20.8492 4.69754 21.2008 5.04917C21.5525 5.40081 21.75 5.87772 21.75 6.375V17.625C21.75 18.1223 21.5525 18.5992 21.2008 18.9508C20.8492 19.3025 20.3723 19.5 19.875 19.5H10.875C10.3777 19.5 9.90081 19.3025 9.54917 18.9508C9.19754 18.5992 9 18.1223 9 17.625V15.75M6 8.25L2.25 12M2.25 12L6 15.75M2.25 12H15.0469"
+                stroke="#003725"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="basis-full md:basis-[80%] py-12 xs:ps-8 ps-4 md:ps-0">
+      <div
+        class="pe-4 xs:pe-8"
+        id="your-info"
+        role="tabpanel"
+        aria-labelledby="your-info-button"
+      >
+        <div
+          class="flex border-b border-b-gray-500 pb-4 items-center w-full justify-between"
+        >
+          <div class="flex items-center">
+            <button
+              class="p-2 toggle-sidebar block md:hidden"
+              aria-label="Open Side Bar"
+            >
+              <svg
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                width="41"
+                height="40"
+                viewBox="0 0 41 40"
+                fill="none"
+              >
+                <path
+                  d="M12.1665 19.5H28.1665M12.1665 13.5H28.1665M12.1665 25.5H28.1665"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <h2 class="tab-h">اطلاعات شما</h2>
+          </div>
+          <button
+            id="open-modal"
+            aria-haspopup="dialog"
+            class="flex px-4 p-[10px] duration-700 transition-[background] hover:bg-orange-400 rounded-lg items-center gap-1"
+          >
+            <svg
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="25"
+              viewBox="0 0 24 25"
+              fill="none"
+            >
+              <path
+                d="M13 3.5C13.2549 3.50028 13.5 3.59788 13.6854 3.77285C13.8707 3.94782 13.9822 4.18695 13.9972 4.44139C14.0121 4.69584 13.9293 4.94638 13.7657 5.14183C13.6021 5.33729 13.3701 5.4629 13.117 5.493L13 5.5H5V19.5H19V11.5C19.0003 11.2451 19.0979 11 19.2728 10.8146C19.4478 10.6293 19.687 10.5178 19.9414 10.5028C20.1958 10.4879 20.4464 10.5707 20.6418 10.7343C20.8373 10.8979 20.9629 11.1299 20.993 11.383L21 11.5V19.5C21.0002 20.0046 20.8096 20.4906 20.4665 20.8605C20.1234 21.2305 19.6532 21.4572 19.15 21.495L19 21.5H5C4.49542 21.5002 4.00943 21.3096 3.63945 20.9665C3.26947 20.6234 3.04284 20.1532 3.005 19.65L3 19.5V5.5C2.99984 4.99542 3.19041 4.50943 3.5335 4.13945C3.87659 3.76947 4.34684 3.54284 4.85 3.505L5 3.5H13ZM19.243 3.843C19.423 3.66365 19.6644 3.55953 19.9184 3.55177C20.1723 3.54402 20.4197 3.63322 20.6103 3.80125C20.8008 3.96928 20.9203 4.20355 20.9444 4.45647C20.9685 4.7094 20.8954 4.96201 20.74 5.163L20.657 5.258L10.757 15.157C10.577 15.3363 10.3356 15.4405 10.0816 15.4482C9.82767 15.456 9.58029 15.3668 9.38972 15.1988C9.19916 15.0307 9.07969 14.7964 9.0556 14.5435C9.03151 14.2906 9.10459 14.038 9.26 13.837L9.343 13.743L19.243 3.843Z"
+                fill="black"
+              />
+            </svg>
+            <p>ویرایش</p>
+          </button>
+        </div>
+
+        <div
+          class="block space-y-4 xs:space-y-0 xs:grid grid-cols-1 lg:grid-cols-2 mt-16 gap-y-8 gap-x-4"
+        >
+          <div class="xs:flex flex-row gap-3 text-nowrap">
+            <div
+              class="bg-orange-400 text-center rounded-lg py-[10px] px-[30px]"
+            >
+              <p class="text-brown">نام و نام خانوادگی</p>
+            </div>
+            <div
+              class="bg-gray-100 py-2 xs:py-0 basis-full flex justify-center items-center rounded-lg"
+            >
+              <p class="text-gray-900">ساغر بیتایی</p>
+            </div>
+          </div>
+          <div class="xs:flex gap-3 flex-row text-nowrap">
+            <div
+              class="bg-orange-400 text-brown justify-center flex basis-[11.25rem] rounded-lg py-[10px] px-[30px]"
+            >
+              <p class="text-gray-900">ایمیل</p>
+            </div>
+            <div
+              class="bg-gray-100 py-2 xs:py-0 basis-[calc(100%-11.25rem)] flex justify-center items-center rounded-lg"
+            >
+              <p class="text-gray-900">Username@gmail.com</p>
+            </div>
+          </div>
+          <div class="xs:flex flex-row gap-3 text-nowrap h-fit">
+            <div
+              class="bg-orange-400 text-brown flex justify-center basis-[11.25rem] rounded-lg py-[10px] px-[30px]"
+            >
+              <p>شماره تلفن</p>
+            </div>
+            <div
+              class="bg-gray-100 py-2 xs:py-0 basis-[calc(100%-11.25rem)] flex justify-center items-center rounded-lg"
+            >
+              <p class="text-gray-900">+۹۸ ۰۹۹۰ ۱۲۳ ۴۵۶۷</p>
+            </div>
+          </div>
+          <div class="xs:flex flex-row gap-3">
+            <div
+              class="bg-orange-400 text-brown h-fit basis-[11.25rem] justify-center flex rounded-lg py-[10px] px-[30px]"
+            >
+              <p>آدرس</p>
+            </div>
+            <div
+              class="bg-gray-100 py-2 xs:py-[10px] text-gray-900 p-[10px] basis-[calc(100%-11.25rem)] flex justify-center items-center rounded-lg"
+            >
+              <p>کشور فلان، استان فلان، شهر فلان، کوچه‌ی ۱، پلاک ۲، واحد ۳</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="hidden pe-4 xs:pe-8"
+        aria-hidden="true"
+        id="your-courses"
+        role="tabpanel"
+        aria-labelledby="your-courses-button"
+      >
+        <div class="border-b border-b-gray-500 pb-4">
+          <div class="flex items-center">
+            <button
+              class="p-2 toggle-sidebar block md:hidden"
+              aria-label="Open Side Bar"
+            >
+              <svg
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                width="41"
+                height="40"
+                viewBox="0 0 41 40"
+                fill="none"
+              >
+                <path
+                  d="M12.1665 19.5H28.1665M12.1665 13.5H28.1665M12.1665 25.5H28.1665"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <h2 class="tab-h">دوره های شما</h2>
+          </div>
+        </div>
+        <div
+          class="mt-8 text-nowrap"
+          role="table"
+          aria-label="The Courses you have ordered"
+        >
+          <div
+            role="row"
+            class="bg-orange-400 text-brown justify-normal flex text-lg lg:text-2xl rounded-2xl p-4"
+          >
+            <div role="columnheader" class="basis-[25%]">ردیف</div>
+            <div role="columnheader" class="basis-[190px] md:basis-[220px]">
+              نام کتاب
+            </div>
+            <div role="columnheader" class="basis-[25%]">تاریخ سفارش</div>
+            <div role="columnheader">تعداد</div>
+          </div>
+          <div
+            class="mt-[31px] bg-white shadow-[6px_12px_24px_0px_rgba(0,0,0,0.16)] rounded-2xl space-y-8 text-lg lg:text-2xl p-4"
+          >
+            <div role="row" class="flex items-center text-gray-900">
+              <div
+                class="bg-orange-400 space-y-12 py-[18px] px-[19px] rounded-[11px] me-[59px] text-base"
+              >
+                <div role="cell" class="flex items-center justify-center">
+                  1
+                </div>
+                <div role="cell" class="flex items-center justify-center">
+                  2
+                </div>
+                <div role="cell" class="flex items-center justify-center">
+                  3
+                </div>
+                <div role="cell" class="flex items-center justify-center">
+                  4
+                </div>
+              </div>
+              <div
+                class="space-y-12 basis-[35%] border-e border-e-gray-300 pe-12"
+              >
+                <div role="cell">نامارش شده</div>
+                <div role="cell">ن شده</div>
+                <div role="cell">نام کتاب شده</div>
+                <div role="cell">نداده شده</div>
+              </div>
+              <div class="space-y-12 border-e border-e-gray-300 px-12">
+                <div role="cell">۰۹\۱۴\۱۴۰۳</div>
+                <div role="cell">۰۹\۱۴\۱۴۰۳</div>
+                <div role="cell">۰۹\۱۴\۱۴۰۳</div>
+                <div role="cell">۰۹\۱۴\۱۴۰۳</div>
+              </div>
+              <div class="space-y-12 ps-10">
+                <div role="cell">1</div>
+                <div role="cell">1</div>
+                <div role="cell">1</div>
+                <div role="cell">1</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        id="your-books"
+        class="pe-4 xs:pe-8 hidden"
+        aria-hidden="true"
+        role="tabpanel"
+        aria-labelledby="your-books-button"
+      >
+        <div class="border-b border-b-gray-500 pb-4">
+          <div class="flex items-center">
+            <button
+              class="p-2 toggle-sidebar block md:hidden"
+              aria-label="Open Side Bar"
+            >
+              <svg
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                width="41"
+                height="40"
+                viewBox="0 0 41 40"
+                fill="none"
+              >
+                <path
+                  d="M12.1665 19.5H28.1665M12.1665 13.5H28.1665M12.1665 25.5H28.1665"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <h2 class="tab-h">کتاب های شما</h2>
+          </div>
+        </div>
+        <div
+          class="mt-8 text-nowrap"
+          role="table"
+          aria-label="The books you have ordered"
+        >
+          <div
+            role="row"
+            class="bg-orange-400 text-brown justify-normal flex text-lg lg:text-2xl rounded-2xl p-4"
+          >
+            <div role="columnheader" class="basis-[25%]">ردیف</div>
+            <div role="columnheader" class="basis-[190px] md:basis-[220px]">
+              نام کتاب
+            </div>
+            <div role="columnheader" class="basis-[25%]">تاریخ سفارش</div>
+            <div role="columnheader">تعداد</div>
+          </div>
+          <div
+            class="mt-[31px] bg-white shadow-[6px_12px_24px_0px_rgba(0,0,0,0.16)] rounded-2xl space-y-8 text-lg lg:text-2xl p-4"
+          >
+            <div role="row" class="flex items-center text-gray-900">
+              <div
+                class="bg-orange-400 space-y-12 py-[18px] px-[19px] rounded-[11px] me-[59px] text-base"
+              >
+                <div role="cell" class="flex items-center justify-center">
+                  1
+                </div>
+                <div role="cell" class="flex items-center justify-center">
+                  2
+                </div>
+                <div role="cell" class="flex items-center justify-center">
+                  3
+                </div>
+                <div role="cell" class="flex items-center justify-center">
+                  4
+                </div>
+              </div>
+              <div
+                class="space-y-12 basis-[35%] border-e border-e-gray-300 pe-12"
+              >
+                <div role="cell">نامارش شده</div>
+                <div role="cell">ن شده</div>
+                <div role="cell">نام کتاب شده</div>
+                <div role="cell">نداده شده</div>
+              </div>
+              <div class="space-y-12 border-e border-e-gray-300 px-12">
+                <div role="cell">۰۹\۱۴\۱۴۰۳</div>
+                <div role="cell">۰۹\۱۴\۱۴۰۳</div>
+                <div role="cell">۰۹\۱۴\۱۴۰۳</div>
+                <div role="cell">۰۹\۱۴\۱۴۰۳</div>
+              </div>
+              <div class="space-y-12 ps-10">
+                <div role="cell">1</div>
+                <div role="cell">1</div>
+                <div role="cell">1</div>
+                <div role="cell">1</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="hidden pe-4 xs:pe-8"
+        aria-hidden="true"
+        id="your-counseling"
+        role="tabpanel"
+        aria-labelledby="your-counseling-button"
+      >
+        <div class="border-b border-b-gray-500 pb-4">
+          <div class="flex items-center">
+            <button
+              class="p-2 toggle-sidebar block md:hidden"
+              aria-label="Open Side Bar"
+            >
+              <svg
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                width="41"
+                height="40"
+                viewBox="0 0 41 40"
+                fill="none"
+              >
+                <path
+                  d="M12.1665 19.5H28.1665M12.1665 13.5H28.1665M12.1665 25.5H28.1665"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <h2 class="tab-h">مشاوره های شما</h2>
+          </div>
+        </div>
+        <div
+          class="mt-8 text-nowrap"
+          role="table"
+          aria-label="The Counseling you have ordered"
+        >
+          <div
+            role="row"
+            class="bg-orange-400 text-brown justify-normal flex text-lg lg:text-2xl rounded-2xl p-4"
+          >
+            <div role="columnheader" class="basis-[25%]">ردیف</div>
+            <div role="columnheader" class="basis-[190px] md:basis-[220px]">
+              نام کتاب
+            </div>
+            <div role="columnheader" class="basis-[25%]">تاریخ سفارش</div>
+            <div role="columnheader">تعداد</div>
+          </div>
+          <div
+            class="mt-[31px] bg-white shadow-[6px_12px_24px_0px_rgba(0,0,0,0.16)] rounded-2xl space-y-8 text-lg lg:text-2xl p-4"
+          >
+            <div role="row" class="flex items-center text-gray-900">
+              <div
+                class="bg-orange-400 space-y-12 py-[18px] px-[19px] rounded-[11px] me-[59px] text-base"
+              >
+                <div role="cell" class="flex items-center justify-center">
+                  1
+                </div>
+                <div role="cell" class="flex items-center justify-center">
+                  2
+                </div>
+                <div role="cell" class="flex items-center justify-center">
+                  3
+                </div>
+                <div role="cell" class="flex items-center justify-center">
+                  4
+                </div>
+              </div>
+              <div
+                class="space-y-12 basis-[35%] border-e border-e-gray-300 pe-12"
+              >
+                <div role="cell">نامارش شده</div>
+                <div role="cell">ن شده</div>
+                <div role="cell">نام کتاب شده</div>
+                <div role="cell">نداده شده</div>
+              </div>
+              <div class="space-y-12 border-e border-e-gray-300 px-12">
+                <div role="cell">۰۹\۱۴\۱۴۰۳</div>
+                <div role="cell">۰۹\۱۴\۱۴۰۳</div>
+                <div role="cell">۰۹\۱۴\۱۴۰۳</div>
+                <div role="cell">۰۹\۱۴\۱۴۰۳</div>
+              </div>
+              <div class="space-y-12 ps-10">
+                <div role="cell">1</div>
+                <div role="cell">1</div>
+                <div role="cell">1</div>
+                <div role="cell">1</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="hidden pe-4 xs:pe-8"
+        aria-hidden="true"
+        id="your-messages"
+        role="tabpanel"
+        aria-labelledby="your-messages-button"
+      >
+        <div class="border-b border-b-gray-500 pb-4">
+          <div class="flex items-center">
+            <button
+              class="p-2 toggle-sidebar block md:hidden"
+              aria-label="Open Side Bar"
+            >
+              <svg
+                role="img"
+                xmlns="http://www.w3.org/2000/svg"
+                width="41"
+                height="40"
+                viewBox="0 0 41 40"
+                fill="none"
+              >
+                <path
+                  d="M12.1665 19.5H28.1665M12.1665 13.5H28.1665M12.1665 25.5H28.1665"
+                  stroke="black"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <h2 class="tab-h">پیام های شما</h2>
+          </div>
+        </div>
+        <div
+          class="mt-8 bg-white shadow-[6px_12px_24px_0px_rgba(0,0,0,0.16)] space-y-4 rounded-2xl p-4"
+        >
+          <div class="rounded-lg group pt-2 pb-[10px] px-4 bg-orange-400">
+            <button
+              aria-expanded="false"
+              class="w-full expand-toggle group items-center"
+              aria-controls="expandable-content-1"
+            >
+              <div
+                class="text-brown group-[.read-message]:text-gray-950 items-center w-full justify-between flex"
+              >
+                <p>عنوان پیام</p>
+                <div class="flex items-center gap-2">
+                  <p>۰۹\۱۴\۱۴۰۳</p>
+                  <div class="flex items-center gap-2">
+                    <p class="group-[.read-message]:hidden block">
+                      خوانده نشده
+                    </p>
+                    <p class="group-[.read-message]:block hidden">خوانده شده</p>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="29"
+                      class="group-aria-expanded:-rotate-90 hidden xs:block"
+                      viewBox="0 0 28 29"
+                      fill="none"
+                    >
+                      <path
+                        d="M18.1393 8.17666L16.9015 6.93999L10.1593 13.6798C10.0507 13.7878 9.96442 13.9162 9.90556 14.0577C9.84671 14.1992 9.81641 14.3509 9.81641 14.5041C9.81641 14.6573 9.84671 14.809 9.90556 14.9504C9.96442 15.0919 10.0507 15.2203 10.1593 15.3283L16.9015 22.0717L18.1382 20.835L11.8102 14.5058L18.1393 8.17666Z"
+                        fill="#5D2D05"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </button>
+
+            <div id="expandable-content-1" class="hidden mt-[26px]">
+              <p class="text-sm">
+                و زمان با هدف اساسا از و دستاوردهای شصت و سه درصد متنوع و زمان
+                سادگی تمام شرایط تولید از در زبان فارسی که، روزنامه. حروفچینی از
+                شناخت نامفهوم، چاپگرها در این صورت دستاوردهای تمام و دشواری امید
+                حروفچینی و فرهنگ پیشرو به پایان
+              </p>
+            </div>
+          </div>
+          <div class="rounded-lg group pt-2 pb-[10px] px-4 bg-orange-400">
+            <button
+              aria-expanded="false"
+              class="w-full expand-toggle group items-center"
+              aria-controls="expandable-content-2"
+            >
+              <div
+                class="text-brown group-[.read-message]:text-gray-950 items-center w-full justify-between flex"
+              >
+                <p>عنوان پیام</p>
+                <div class="flex items-center gap-2">
+                  <p>۰۹\۱۴\۱۴۰۳</p>
+                  <div class="flex items-center gap-2">
+                    <p class="group-[.read-message]:hidden block">
+                      خوانده نشده
+                    </p>
+                    <p class="group-[.read-message]:block hidden">خوانده شده</p>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="29"
+                      class="group-aria-expanded:-rotate-90 hidden xs:block"
+                      viewBox="0 0 28 29"
+                      fill="none"
+                    >
+                      <path
+                        d="M18.1393 8.17666L16.9015 6.93999L10.1593 13.6798C10.0507 13.7878 9.96442 13.9162 9.90556 14.0577C9.84671 14.1992 9.81641 14.3509 9.81641 14.5041C9.81641 14.6573 9.84671 14.809 9.90556 14.9504C9.96442 15.0919 10.0507 15.2203 10.1593 15.3283L16.9015 22.0717L18.1382 20.835L11.8102 14.5058L18.1393 8.17666Z"
+                        fill="#5D2D05"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </button>
+
+            <div id="expandable-content-2" class="hidden mt-[26px]">
+              <p class="text-sm">
+                و زمان با هدف اساسا از و دستاوردهای شصت و سه درصد متنوع و زمان
+                سادگی تمام شرایط تولید از در زبان فارسی که، روزنامه. حروفچینی از
+                شناخت نامفهوم، چاپگرها در این صورت دستاوردهای تمام و دشواری امید
+                حروفچینی و فرهنگ پیشرو به پایان
+              </p>
+            </div>
+          </div>
+          <div class="rounded-lg group pt-2 pb-[10px] px-4 bg-orange-400">
+            <button
+              aria-expanded="false"
+              class="w-full expand-toggle group items-center"
+              aria-controls="expandable-content-3"
+            >
+              <div
+                class="text-brown group-[.read-message]:text-gray-950 items-center w-full justify-between flex"
+              >
+                <p>عنوان پیام</p>
+                <div class="flex items-center gap-2">
+                  <p>۰۹\۱۴\۱۴۰۳</p>
+                  <div class="flex items-center gap-2">
+                    <p class="group-[.read-message]:hidden block">
+                      خوانده نشده
+                    </p>
+                    <p class="group-[.read-message]:block hidden">خوانده شده</p>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="29"
+                      class="group-aria-expanded:-rotate-90 hidden xs:block"
+                      viewBox="0 0 28 29"
+                      fill="none"
+                    >
+                      <path
+                        d="M18.1393 8.17666L16.9015 6.93999L10.1593 13.6798C10.0507 13.7878 9.96442 13.9162 9.90556 14.0577C9.84671 14.1992 9.81641 14.3509 9.81641 14.5041C9.81641 14.6573 9.84671 14.809 9.90556 14.9504C9.96442 15.0919 10.0507 15.2203 10.1593 15.3283L16.9015 22.0717L18.1382 20.835L11.8102 14.5058L18.1393 8.17666Z"
+                        fill="#5D2D05"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </button>
+
+            <div id="expandable-content-3" class="hidden mt-[26px]">
+              <p class="text-sm">
+                و زمان با هدف اساسا از و دستاوردهای شصت و سه درصد متنوع و زمان
+                سادگی تمام شرایط تولید از در زبان فارسی که، روزنامه. حروفچینی از
+                شناخت نامفهوم، چاپگرها در این صورت دستاوردهای تمام و دشواری امید
+                حروفچینی و فرهنگ پیشرو به پایان
+              </p>
+            </div>
+          </div>
+          <div
+            class="my-[18px] relative w-full flex justify-center items-center text-gray-300"
+          >
+            <p class="bg-white z-[50] px-3">13 آذر</p>
+            <div class="w-full absolute h-[1px] bg-gray-300"></div>
+          </div>
+          <div class="rounded-lg group pt-2 pb-[10px] px-4 read-message">
+            <button
+              aria-expanded="false"
+              class="w-full expand-toggle group items-center"
+              aria-controls="expandable-content-4"
+            >
+              <div
+                class="text-brown group-[.read-message]:text-gray-950 items-center w-full justify-between flex"
+              >
+                <p>عنوان پیام</p>
+                <div class="flex items-center gap-2">
+                  <p>۰۹\۱۴\۱۴۰۳</p>
+                  <div class="flex items-center gap-2">
+                    <p class="group-[.read-message]:hidden block">
+                      خوانده نشده
+                    </p>
+                    <p class="group-[.read-message]:block hidden">خوانده شده</p>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="29"
+                      class="group-aria-expanded:-rotate-90 hidden xs:block"
+                      viewBox="0 0 28 29"
+                      fill="none"
+                    >
+                      <path
+                        d="M18.1393 8.17666L16.9015 6.93999L10.1593 13.6798C10.0507 13.7878 9.96442 13.9162 9.90556 14.0577C9.84671 14.1992 9.81641 14.3509 9.81641 14.5041C9.81641 14.6573 9.84671 14.809 9.90556 14.9504C9.96442 15.0919 10.0507 15.2203 10.1593 15.3283L16.9015 22.0717L18.1382 20.835L11.8102 14.5058L18.1393 8.17666Z"
+                        fill="#5D2D05"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </button>
+
+            <div id="expandable-content-4" class="hidden mt-[26px]">
+              <p class="text-sm">
+                و زمان با هدف اساسا از و دستاوردهای شصت و سه درصد متنوع و زمان
+                سادگی تمام شرایط تولید از در زبان فارسی که، روزنامه. حروفچینی از
+                شناخت نامفهوم، چاپگرها در این صورت دستاوردهای تمام و دشواری امید
+                حروفچینی و فرهنگ پیشرو به پایان
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "Yekan";
+    src: url("/src/assets/fonts/IRANYekan/IRANYekan.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  body {
+    font-family: "Yekan", "sens-serif";
+  }
+}
+
+@layer utilities {
+  .read-message {
+    @apply !bg-gray-100;
+  }
+}
+
+.tab-h {
+  font-size: clamp(1rem, 2vw + 0.5rem, 2rem)
+}
