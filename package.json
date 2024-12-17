@@ -7,7 +7,8 @@
   "license": "ISC",
   "description": "",
   "scripts": {
-    "watch": "npx tailwindcss -i ./src/styles/index.css -o ./dist/styles/app.css --watch "
+    "watch": "npx tailwindcss -i ./src/styles/index.css -o ./dist/styles/app.css --watch ",
+    "build": "npx tailwindcss -i ./src/input.css -o ./src/output.css && tsc"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
