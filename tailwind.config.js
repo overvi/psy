@@ -10,7 +10,7 @@ module.exports = {
       screens: {
         lg: "1150px",
         md: "950px",
-        xs: "420px",
+        xs: "450px",
       },
       colors: {
         brown: "#5D2D05",
