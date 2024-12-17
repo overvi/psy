@@ -136,7 +136,15 @@ modal.addEventListener("click", (e) => {
 });
 
 const toggleSidebarFn = () => {
-  // sidebar?.classList.toggle("translate-x-[200%]");
+  sidebar?.classList.toggle("translate-x-full");
+
+  if (sidebar?.classList.contains("translate-x-full")) {
+    document.documentElement.classList.remove("overflow-hidden");
+    document.querySelector("body")?.classList.remove("overflow-hidden");
+  } else {
+    document.documentElement.classList.add("overflow-hidden");
+    document.querySelector("body")?.classList.add("overflow-hidden");
+  }
 };
 
 const toggleSidebar = document.querySelectorAll(".toggle-sidebar");
