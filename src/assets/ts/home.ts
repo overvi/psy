@@ -1,3 +1,5 @@
+import initExpandes from "./expandable.js";
+
 function showTab(tabId: string) {
   // Hide all tabs
   const panels = document.querySelectorAll(
@@ -45,32 +47,7 @@ tabToggles.addEventListener("click", (e) => {
     showTab(tabButton.getAttribute("aria-controls")!);
   }
 });
-
-const toggles = document.querySelectorAll(
-  ".expand-toggle"
-) as NodeListOf<HTMLElement>;
-
-toggles.forEach((toggle) => {
-  toggle.addEventListener("click", () => {
-    const isExpanded = toggle.getAttribute("aria-expanded") === "true";
-    const content = document.getElementById(
-      toggle.getAttribute("aria-controls")!
-    ) as HTMLElement;
-
-    // Toggle aria-expanded
-    toggle.setAttribute("aria-expanded", `${!isExpanded}`);
-
-    if (
-      !isExpanded &&
-      !toggle.parentElement?.classList.contains("read-message")
-    ) {
-      toggle.parentElement!.classList.add("read-message");
-    }
-
-    // Show or hide the content
-    content.classList.toggle("hidden");
-  });
-});
+initExpandes(true, false);
 
 const openModalButton = document.getElementById("open-modal") as HTMLElement;
 const modal = document.getElementById("modal") as HTMLElement;

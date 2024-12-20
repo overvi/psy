@@ -19,8 +19,44 @@
   .read-message {
     @apply !bg-gray-100;
   }
-}
 
-.tab-h {
-  font-size: clamp(1rem, 2vw + 0.5rem, 2rem)
+  .step-4.read-message {
+    @apply !bg-orange-200;
+  }
+
+  .hide-scroll::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scroll {
+    scrollbar-width: none;
+  }
+
+  .tab-h {
+    font-size: clamp(1rem, 2vw + 0.5rem, 2rem);
+  }
+
+  .step-h {
+    font-size: clamp(0.15rem, 1vw + 0.65rem, 2rem);
+    @apply leading-normal sm:leading-8;
+  }
+  .step-c {
+    font-size: clamp(0.5rem, 1vw + 0.2rem, 0.75rem);
+    line-height: 1rem;
+  }
+
+  .day-hovered {
+    @apply bg-orange-400 text-light-brown;
+  }
+
+  .day-selected {
+    @apply outline-[3px] outline-light-brown text-light-brown pb-2;
+  }
+
+  .day-istoday {
+    @apply bg-orange-400 outline-gray-500 text-light-brown shadow-[0px_0px_4.3px_0px_#FFB787];
+  }
+
+  .day-disabled {
+    @apply text-disabled bg-orange-50;
+  }
 }
