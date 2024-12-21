@@ -116,11 +116,11 @@ const toggleSidebarFn = () => {
   sidebar?.classList.toggle("translate-x-full");
 
   if (sidebar?.classList.contains("translate-x-full")) {
-    document.documentElement.classList.remove("overflow-hidden");
-    document.querySelector("body")?.classList.remove("overflow-hidden");
+    document.documentElement.classList.remove("overflow-x-hidden");
+    document.querySelector("body")?.classList.remove("overflow-x-hidden");
   } else {
-    document.documentElement.classList.add("overflow-hidden");
-    document.querySelector("body")?.classList.add("overflow-hidden");
+    document.documentElement.classList.add("overflow-x-hidden");
+    document.querySelector("body")?.classList.add("overflow-x-hidden");
   }
 };
 
